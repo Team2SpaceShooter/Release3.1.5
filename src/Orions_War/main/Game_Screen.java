@@ -114,14 +114,14 @@ public class Game_Screen extends JPanel implements KeyListener
 		  
 		  	
 		  	enemies NPC = new enemies();
-		  	enemies.spawnenemies1();
+		  	//enemies.spawnenemies1();
 		 	//this.setVisible(true);
 		 
 			//this.setEnabled(true);
 			//this.setFocusable(true);
 		
 			Graphics g = Main.Game_Screen.getGraphics();
-			g.drawImage(img1, 0, 0, 1000,800, this);
+			g.drawImage(img1, 0, 0, 1010,805, this);
 			//g.drawImage()
 			  g.drawImage(Main.Player1.ship,Ship_Pos_X,Ship_Pos_Y, (Main.Player1.ship.getWidth())/2,(Main.Player1.ship.getHeight())/2,this);
 			  //NPC_Ships one = new NPC_Ships(1,400, 500, 0 ,0, 5);
@@ -208,6 +208,7 @@ public class Game_Screen extends JPanel implements KeyListener
 		{ 		
 			public void run()
 			{Main.Game_Screen.setDoubleBuffered(true);
+			
 				while(!escPressed)
 				{
 					
@@ -351,17 +352,20 @@ public class Game_Screen extends JPanel implements KeyListener
 		{ 		
 			public void run()
 			{Main.Game_Screen.setDoubleBuffered(true);
+			enemies.spawnenemies1();
+			//enemies.spawnenemies2();
+			//enemies.spawnenemies3();
 				while(!escPressed)
 				{
 					
 					//long time = System.currentTimeMillis();
 					
 					
-					Graphics g = Main.Game_Screen.getGraphics();
+					//Graphics g = Main.Game_Screen.getGraphics();
 					
 					//if(current_xVel != 0.0 || current_yVel !=0.0)
-					g.drawImage(img1, 0, 0, 1000,800, Main.Game_Screen);
-				
+					//g.drawImage(img1, 0, 0, 1000,800, Main.Game_Screen);
+					//enemies.spawnenemies1();
 					//HandlekeyActions();
 					//Handle_Collisions();
 					//updateShip();
@@ -392,11 +396,13 @@ public class Game_Screen extends JPanel implements KeyListener
 		Thread thr3 = new Thread(r3);
 		Thread thr4 = new Thread(r4);
 		//Thread thr5 = new Thread(r5);
+		Thread thr6 = new Thread(r6);
 		thr1.start();
 		thr2.start();
 		thr3.start();
 		thr4.start();
 	   // thr5.start();
+		thr6.start();
 	}
 		
 		

@@ -33,7 +33,12 @@ public class Enemy_Space_Objects
 	public void move()
 	{
 		yPosition += yVelocity;
-		
+		xPosition += xVelocity;
 	}
 
+	public void update_velocities(int x, int y)
+	{
+		xVelocity = x;
+		yVelocity = y;
+	}
 }

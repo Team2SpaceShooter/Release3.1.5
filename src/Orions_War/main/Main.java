@@ -52,7 +52,7 @@ public class Main
     	System.out.println("creating GUI");
     	
     	mainFrame = new JFrame();
-    	mainFrame.setSize(new Dimension(1012,825));
+    	mainFrame.setSize(new Dimension(1000,800));
     	mainFrame.setIconImage(Toolkit.getDefaultToolkit().getImage("images/spacebackgrouBIG.png"));
     	mainFrame.setResizable(false);
     	mainFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);

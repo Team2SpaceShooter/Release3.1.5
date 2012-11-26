@@ -32,9 +32,36 @@ public class enemies
 			public void run(){
 			for(int i=0; i < 10; i++)
 			{
-				add(new NPC_Ships(0, -5, 100, 2, 0, 5));
+				add(new NPC_Ships(0, -5, 200, 6, -1, 5));
+				add(new NPC_Ships(0, -30, 250, 6, -1, 5));
+				add(new NPC_Ships(0, 15, 300, 6, -1, 5));
+		
+				
+				
 				try {
-					Thread.sleep(1500);
+					Thread.sleep(500);
+				} catch (InterruptedException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			}
+			try {
+				Thread.sleep(500);
+				for(int j =0; j < 10; j++)
+					enemies.get(j).update_velocities(-6 , 3 );
+				Thread.sleep(3000);
+				
+			} catch (InterruptedException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			for(int i=0; i < 10; i++)
+			{
+				add(new NPC_Ships(0, 980, 250, -5, -1, 5));
+				add(new NPC_Ships(0, 1005, 300, -5, -1, 5));
+				add(new NPC_Ships(0, 1030, 350, -5, -1, 5));
+				try {
+					Thread.sleep(500);
 				} catch (InterruptedException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
@@ -48,14 +75,48 @@ public class enemies
 		
 	}
 	
-	public void spawnenemies2()
+	public static void spawnenemies2()
 	{
+		Runnable r2 = new Runnable()
+		{
+			public void run(){
+			for(int i=0; i < 10; i++)
+			{
+				add(new NPC_Ships(0, -5, 100, 5, 0, 5));
+				try {
+					Thread.sleep(500);
+				} catch (InterruptedException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			}
+			}
+		};
 		
+		Thread r = new Thread(r2);
+		r.run();
 	}
 	
-	public void spawnenemies3()
+	public static void spawnenemies3()
 	{
+		Runnable r2 = new Runnable()
+		{
+			public void run(){
+			for(int i=0; i < 10; i++)
+			{
+				add(new NPC_Ships(0, -5, 400, 5, -1, 5));
+				try {
+					Thread.sleep(500);
+				} catch (InterruptedException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			}
+			}
+		};
 		
+		Thread r = new Thread(r2);
+		r.run();
 	}
 	
 	public static void drawAll(Graphics g)
@@ -70,7 +131,7 @@ public class enemies
 	{
 		for(int i=0; i < enemies.size(); i++)
 		{
-			if(enemies.get(i).xPosition > 810 || enemies.get(i).xPosition < -10)
+			if(enemies.get(i).xPosition > 1050 || enemies.get(i).xPosition < -50)
 			enemies.remove(i);
 		}
 	}
