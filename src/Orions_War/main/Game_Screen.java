@@ -57,6 +57,7 @@ public class Game_Screen extends JPanel implements KeyListener
 	
 	// These are the bool fields that correspond to in game key presses
 	private boolean upPress, downPress, leftPress, rightPress, spacePress, escPressed;
+	public Sound shotSound = new Sound("sounds/Blaster-Imperial.wav"); 
 	
 	public Game_Screen()
 	{
@@ -630,7 +631,7 @@ public class Game_Screen extends JPanel implements KeyListener
 	public void fire_shot()
 	{
 		shots.add(new Shot((double)Ship_Pos_X+26,(double)Ship_Pos_Y - 10, 0 ,-10));
-		
+		shotSound.play();
 	}
 	
 	public void deal_with_shots_fired(Graphics g)
