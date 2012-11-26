@@ -1,5 +1,6 @@
 package Orions_War.main;
 
+
 import java.awt.Color; 
 import java.awt.Dimension;
 import java.awt.Graphics;
@@ -15,6 +16,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Random;
 import java.util.Scanner;
+import java.util.Vector;
 import java.awt.Font;
 import javax.imageio.ImageIO;
 import javax.swing.JLabel;
@@ -679,12 +681,40 @@ public class Game_Screen extends JPanel implements KeyListener
 	public void Handle_Collisions()
 	{
 	boolean[] shotsAlive = new boolean[shots.size()];
-
+	boolean[] NPCsAlive = new boolean[enemies.enemies.size()];
 	ArrayList<Shot> newShots = new ArrayList<Shot>();
+	ArrayList<NPC_Ships> newEnemies = new ArrayList<NPC_Ships>();
 
 	Arrays.fill(shotsAlive, true);
-
-
+    Arrays.fill(NPCsAlive, true);
+    // Deal with shots blowing up enemies
+	for(int i = 0; i < shots.size(); i++) 
+		if(shotsAlive[i])
+	{
+		Shot s = shots.get(i);
+		for(int j = 0; j < enemies.enemies.size(); j++) 
+			if(NPCsAlive[j])
+		{
+			NPC_Ships e = enemies.enemies.get(j);
+			
+			// If a shot has hit a comet, destroy both the shot and comet
+			if(s.overlapping(e))
+			{
+				 enemies.enemies.get(j).current_health -= Main.Player1.shipDamage;
+				System.out.println("ENEMY " + j + " has been hit and has " + enemies.enemies.get(j).current_health + "Left");
+				shotsAlive[i] = false;
+				if(enemies.enemies.get(j).current_health <= 0)
+				NPCsAlive[j] = false;
+				
+				// New Comets spawn for the next frame
+				// Keep this?					
+				break;
+			}
+		}
+	}
+    
+    
+    //Deals with Shots not having hit anything and just existing
 	for(int i = 0; i < shots.size(); i++) 
 	if(shotsAlive[i]) 
 	{
@@ -692,8 +722,12 @@ public class Game_Screen extends JPanel implements KeyListener
 	  if(s.getYPosition() > 0) 
 	   newShots.add(s);
 	}
-	
-
+	for(int j = 0; j < enemies.enemies.size(); ++j) 
+		if(NPCsAlive[j]) 
+			newEnemies.add(enemies.enemies.get(j));
+ 
+	enemies.enemies = newEnemies;
+	shots = newShots;
 	}		
 
 	
