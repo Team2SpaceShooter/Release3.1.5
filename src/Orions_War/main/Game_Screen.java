@@ -57,7 +57,7 @@ public class Game_Screen extends JPanel implements KeyListener
 	
 	// These are the bool fields that correspond to in game key presses
 	private boolean upPress, downPress, leftPress, rightPress, spacePress, escPressed;
-	public Sound shotSound = new Sound("sounds/Blaster-Imperial.wav"); 
+	public Sound shotSound = new Sound("sounds/Blaster-Imperial.wav");
 	
 	public Game_Screen()
 	{
@@ -117,6 +117,9 @@ public class Game_Screen extends JPanel implements KeyListener
 		  
 		  	
 		  	enemies NPC = new enemies();
+		  	
+		  	AsteroidHandler spaceRocks = new AsteroidHandler();
+		  	
 		  	//enemies.spawnenemies1();
 		 	//this.setVisible(true);
 		 
@@ -231,6 +234,10 @@ public class Game_Screen extends JPanel implements KeyListener
 					deal_with_shots_fired(g);
 					//deal_with_NPCs(g);
 					enemies.drawAll(g);
+					
+					// Draw asteroids
+					AsteroidHandler.drawAll(g);
+					
 					Toolkit.getDefaultToolkit().sync();	
 					
 					try
@@ -310,6 +317,11 @@ public class Game_Screen extends JPanel implements KeyListener
 					updateShip();
 					enemies.moveAll();
 					enemies.handleOffScreen();
+					
+					
+					// Do asteroid stuff
+					AsteroidHandler.moveAll();
+					AsteroidHandler.handleOffScreen();
 					
 				
 				try
@@ -393,6 +405,33 @@ public class Game_Screen extends JPanel implements KeyListener
 			
 		};
 		
+		// For spawning asteroids
+		Runnable r7 = new Runnable()
+		{
+
+			@Override
+			public void run() 
+			{
+				Main.Game_Screen.setDoubleBuffered(true);
+				AsteroidHandler.spawnAsteroids(1500);
+				
+				while(!escPressed)
+				{
+					AsteroidHandler.spawnAsteroids(1500);
+					try
+					{	
+						Thread.sleep(30);
+					}
+					catch(InterruptedException e)
+					{
+					}
+				}
+				
+				
+			}
+			
+		};
+		
 		
 		Thread thr1 = new Thread(r1);
 		Thread thr2 = new Thread(r2);
@@ -400,12 +439,15 @@ public class Game_Screen extends JPanel implements KeyListener
 		Thread thr4 = new Thread(r4);
 		//Thread thr5 = new Thread(r5);
 		Thread thr6 = new Thread(r6);
+		Thread thr7 = new Thread(r7);
+		
 		thr1.start();
 		thr2.start();
 		thr3.start();
 		thr4.start();
 	   // thr5.start();
 		thr6.start();
+		thr7.start();
 	}
 		
 		
@@ -689,11 +731,11 @@ public class Game_Screen extends JPanel implements KeyListener
 	Arrays.fill(shotsAlive, true);
     Arrays.fill(NPCsAlive, true);
     // Deal with shots blowing up enemies
-	for(int i = 0; i < shots.size(); i++) 
+	for(int i = 0; i < shots.size(); ++i) 
 		if(shotsAlive[i])
 	{
 		Shot s = shots.get(i);
-		for(int j = 0; j < enemies.enemies.size(); j++) 
+		for(int j = 0; j < enemies.enemies.size(); ++j) 
 			if(NPCsAlive[j])
 		{
 			NPC_Ships e = enemies.enemies.get(j);
