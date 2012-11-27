@@ -50,8 +50,10 @@ public class NewGameMenuEventHandler
 				
 				Main.mainFrame.remove(Main.newGameMenu);
 				
-
-				//Main.Player1.saveGame();
+				//String temp1 = Main.Player1.playerName;
+				
+				Main.Player1.Update_Player_Name(Main.newGameMenu.getNewName());
+				Main.Player1.saveGame();
 				Main.mainFrame.add(Main.Game_Screen);
 				   
 				

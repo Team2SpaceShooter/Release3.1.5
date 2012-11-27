@@ -40,7 +40,7 @@ public class Main
     public static ShipShopWeaponsMenu ShipShopWeaponsMenu;
     public static ShipShopHullsMenu ShipShopHullsMenu;
     public static HowToPlayScreen HowToPlayScreen;
-    public static Player Player1;
+    public static Player Player1 = new Player();
     public static Ship_Shop_Engine_Confirmation Ship_Shop_Engine_Confirmation;
     public static Ship_Shop_Thruster_Confirmation Ship_Shop_Thruster_Confirmation;
     public static Ship_Shop_Hull_Confirmation Ship_Shop_Hull_Confirmation;
@@ -52,7 +52,7 @@ public class Main
     	System.out.println("creating GUI");
     	
     	mainFrame = new JFrame();
-    	mainFrame.setSize(new Dimension(1000,800));
+    	mainFrame.setSize(new Dimension(1012,825));
     	mainFrame.setIconImage(Toolkit.getDefaultToolkit().getImage("images/spacebackgrouBIG.png"));
     	mainFrame.setResizable(false);
     	mainFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);

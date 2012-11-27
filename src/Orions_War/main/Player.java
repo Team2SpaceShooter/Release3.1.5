@@ -123,9 +123,55 @@ public class Player
 		saveWriter.println(acceleration);
 		saveWriter.println(maxSpeed);
 		
+		int numItems = 3;
+		int j = 0;
+		
+		for(j = 0; j < numItems; j++)
+		{
+			saveWriter.println(Ship.Ship_Engine.current_Engine[j]);
+		}
+		
+		for(j = 0; j < numItems; j++)
+		{
+			saveWriter.println(Ship.Ship_Engine.purchased_Engine[j]);
+		}
+		
+		for(j = 0; j < numItems; j++)
+		{
+			saveWriter.println(Ship.Ship_Thrusters.current_Thruster[j]);
+		}
+		
+		for(j = 0; j < numItems; j++)
+		{
+			saveWriter.println(Ship.Ship_Thrusters.purchased_Thruster[j]);
+		}
+		
+		for(j = 0; j < numItems; j++)
+		{
+			saveWriter.println(Ship.Ship_Hull.current_hull[j]);
+		}
+		
+		for(j = 0; j < numItems; j++)
+		{
+			saveWriter.println(Ship.Ship_Hull.purchased_hull[j]);
+		}
+		
+		for(j = 0; j < numItems; j++)
+		{
+			saveWriter.println(Ship.Ship_Weapon.current_Weapon[j]);
+		}
+		
+		for(j = 0; j < numItems; j++)
+		{
+			saveWriter.println(Ship.Ship_Weapon.purchased_Weapon[j]);
+		}
+		
+		
 		manifestReader.close();
 		manifestWriter.close();
 		saveWriter.close();
+		
+		System.out.println("finished saving file");
 
 		
 	}
@@ -149,25 +195,60 @@ public class Player
 		System.out.println(playerName);
 
 		playerName = saveReader.nextLine();
-		//System.out.println(playerName);
+		System.out.println(playerName);
 		
 		progress = saveReader.nextInt();
-		//System.out.println(progress);
+		System.out.println(progress);
 		
 		credits = saveReader.nextInt();
-		//System.out.println(credits);
+		System.out.println(credits);
 		
 		shipHealth = saveReader.nextInt();
-		//System.out.println(shipHealth);
+		System.out.println(shipHealth);
 		
 		shipDamage = saveReader.nextInt();
-		//System.out.println(shipDamage);
+		System.out.println(shipDamage);
 		
-		acceleration = saveReader.nextInt();
-		//System.out.println(acceleration);
+		acceleration = Double.valueOf(saveReader.next());
+		System.out.println(acceleration);
 		
-		maxSpeed = saveReader.nextInt();
-		//System.out.println(maxSpeed);
+		maxSpeed = Double.valueOf(saveReader.next());
+		System.out.println(maxSpeed);
+		
+		Ship.Ship_Engine.current_Engine[0] = saveReader.nextInt();
+		Ship.Ship_Engine.current_Engine[1] = saveReader.nextInt();
+		Ship.Ship_Engine.current_Engine[2] = saveReader.nextInt();
+			
+		Ship.Ship_Engine.purchased_Engine[0] = saveReader.nextInt();
+		Ship.Ship_Engine.purchased_Engine[1] = saveReader.nextInt();
+		Ship.Ship_Engine.purchased_Engine[2] = saveReader.nextInt();
+			
+		Ship.Ship_Thrusters.current_Thruster[0] = saveReader.nextInt();
+		Ship.Ship_Thrusters.current_Thruster[1] = saveReader.nextInt();
+		Ship.Ship_Thrusters.current_Thruster[2] = saveReader.nextInt();
+			
+		Ship.Ship_Thrusters.purchased_Thruster[0] = saveReader.nextInt();
+		Ship.Ship_Thrusters.purchased_Thruster[1] = saveReader.nextInt();
+		Ship.Ship_Thrusters.purchased_Thruster[2] = saveReader.nextInt();
+		
+		Ship.Ship_Hull.current_hull[0] = saveReader.nextInt();
+		Ship.Ship_Hull.current_hull[1] = saveReader.nextInt();
+		Ship.Ship_Hull.current_hull[2] = saveReader.nextInt();
+		
+		Ship.Ship_Hull.purchased_hull[0] = saveReader.nextInt();
+		Ship.Ship_Hull.purchased_hull[1] = saveReader.nextInt();
+		Ship.Ship_Hull.purchased_hull[2] = saveReader.nextInt();
+		
+		Ship.Ship_Weapon.current_Weapon[0] = saveReader.nextInt();
+		Ship.Ship_Weapon.current_Weapon[1] = saveReader.nextInt();
+		Ship.Ship_Weapon.current_Weapon[2] = saveReader.nextInt();
+		
+		Ship.Ship_Weapon.purchased_Weapon[0] = saveReader.nextInt();
+		Ship.Ship_Weapon.purchased_Weapon[1] = saveReader.nextInt();
+		Ship.Ship_Weapon.purchased_Weapon[2] = saveReader.nextInt();
+		
+		set_current_ship_image();
+		Ship.update_parts();
 		
 		saveReader.close();
 	}
